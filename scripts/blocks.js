@@ -1,0 +1,51 @@
+import { mainGameContainer } from "./ui.js";
+import { loseLife } from "./gameLogic.js";
+import { continueMessage } from "./ui.js";
+
+export function createBlocks(word) {
+  const newBlock = document.createElement("button");
+  newBlock.setAttribute("id", word);
+  newBlock.setAttribute("class", "word-block");
+  newBlock.textContent = word;
+  newBlock.style.top = "0px";
+  mainGameContainer.appendChild(newBlock);
+  detectOverflow(newBlock);
+}
+
+function detectOverflow(newBlock) {
+  let containerRect = mainGameContainer.getBoundingClientRect();
+  let blockRect;
+
+  do {
+    let leftPos =
+      Math.random() * (mainGameContainer.offsetWidth - newBlock.offsetWidth);
+    newBlock.style.left = leftPos + "px";
+    blockRect = newBlock.getBoundingClientRect();
+  } while (
+    blockRect.left < containerRect.left ||
+    blockRect.right > containerRect.right
+  );
+}
+
+export function blocksFalling(word, arrayFalling, arrayStored) {
+  const block = document.getElementById(word);
+  let pos = 0;
+  const fall = setInterval(() => {
+    if (!block) {
+      clearInterval(fall);
+      return;
+    }
+    pos += 1;
+    block.style.top = pos + "px";
+    if (pos > mainGameContainer.offsetHeight - block.offsetHeight) {
+      block.remove();
+      clearInterval(fall);
+      block.classList.add("blink");
+      if (arrayFalling.includes(word)) {
+        loseLife(arrayFalling, word);
+        continueMessage.style.display = "flex";
+        return (arrayStored.length = 0);
+      }
+    }
+  }, 10);
+}

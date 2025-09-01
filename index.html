@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Falling Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="start-page" id="start-page">
+      <h1>Falling Game</h1>
+      <form></form>
+      <button id="start" class="settings-buttons">Start</button>
+    </div>
+    <div id="game-container">
+      <div id="score-container">
+        <div id="score">
+          <h2 class="text-score">SCORE:</h2>
+          <span id="var-score"></span>
+        </div>
+        <div id="lives-container"></div>
+      </div>
+      <div id="main-game-container" class="main-game-container"></div>
+      <div id="restart-game">
+        <p class="message">You have lost 1 life, get ready to Continue</p>
+        <button id="restart-button" class="settings-buttons">Continue</button>
+      </div>
+    </div>
+    <div id="game-over-container" class="game-over-container">
+      <p id="winner-message" class="message">
+        <strong>Congratulations!</strong><br />
+        You are the winner. You total score is:
+      </p>
+      <p id="game-over-message" class="message">
+        <strong>You have lost all your lives!</strong><br />
+        Start a new game with fresh words, or restart to try again with the same
+        words.
+      </p>
+      <div>
+        <button id="new-game-button" class="settings-buttons">New Game</button>
+        <button id="restart-game-button" class="settings-buttons">
+          Restart Game
+        </button>
+      </div>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

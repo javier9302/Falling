@@ -1,0 +1,129 @@
+.main {
+  position: relative;
+}
+.word-block {
+  border-radius: 15px;
+  background-color: blueviolet;
+  padding: 20px;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  border: none;
+  height: 80px;
+  width: 200px;
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Game Screen */
+
+.main-game-container {
+  position: relative;
+  width: 1200px;
+  height: 700px;
+  border-left: 5px solid #ffde7a;
+  overflow: hidden;
+  background-image: url(/sources/background.jpg);
+  background-size: cover;
+  background-position: bottom;
+}
+#game-container {
+  display: none;
+}
+
+#score {
+  padding: 20px;
+  text-align: center;
+  width: 150px;
+}
+#var_score {
+  font-size: 2rem;
+}
+#start-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  margin-top: 200px;
+  padding: 10px;
+}
+
+.settings-buttons {
+  width: 200px;
+  height: 50px;
+  background-color: blueviolet;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border-radius: 18px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  margin: 20px;
+}
+.settings-buttons:hover {
+  background-color: #ffde7a;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px); /* lifts up a bit */
+}
+
+.settings-buttons:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px); /* pressed down */
+}
+
+#lives-container {
+  display: flex;
+  justify-content: center;
+}
+
+/*Animation */
+
+.blink {
+  animation: blinkColor 0.5s linear 6; /* runs 6 times */
+}
+.message {
+  color: white;
+  font-size: 24px;
+}
+#restart-game {
+  position: absolute;
+  left: 0;
+  top: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #16151157;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+@keyframes blinkColor {
+  0% {
+    background-color: #ffde7a;
+    color: white;
+  }
+  50% {
+    background-color: blueviolet;
+    color: white;
+  }
+  100% {
+    background-color: #ffde7a;
+    color: white;
+  }
+}
+
+/* Game Over Screen */
+.game-over-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #16151157;
+  height: 100vh;
+  text-align: center;
+}

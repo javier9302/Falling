@@ -1,0 +1,16 @@
+export const startGame = document.getElementById("start");
+export const startPage = document.getElementById("start-page");
+export const gameContainer = document.getElementById("game-container");
+export const mainGameContainer = document.getElementById("main-game-container");
+export const livesContainer = document.getElementById("lives-container");
+export const continueMessage = document.getElementById("restart-game");
+export const restartGame = document.getElementById("restart-button");
+export const gameOver = document.getElementById("game-over-container");
+export const newGameBtn = document.getElementById("new-game-button");
+export const restartGameBtn = document.getElementById("restart-game-button");
+export const winner = document.getElementById("winner-meesage");
+export const looser = document.getElementById("game-over-message");
+export let lives = 1;
+export let varScore = document.getElementById("var-score");
+export let score = parseInt(varScore.textContent);
+export const originalWords = ["apple", "banana"];
