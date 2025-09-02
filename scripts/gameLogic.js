@@ -1,4 +1,4 @@
-import { gameStateOriginal } from "./gameState.js";
+import { gameStateOriginal, form } from "./gameState.js";
 import {
   livesContainer,
   varScore,
@@ -9,30 +9,43 @@ import {
   gameOver,
   newGameBtn,
   restartGameBtn,
-  winner,
-  looser,
+  resultmessage,
 } from "./ui.js";
 import { createBlocks, blocksFalling } from "./blocks.js";
 
 let gameState = {};
 
 function resetScores() {
+  console.table(gameState);
+  console.table(gameStateOriginal);
+
   gameState = structuredClone(gameStateOriginal);
+  console.table(gameState);
+  return gameState;
 }
-
-resetScores();
-
 function starts() {
+  //Clean messages and dynamic created content
+
   mainGameContainer.innerHTML = "";
+  resultmessage.innerHTML = "";
+
+  //Hide start and ending screens
+
   startPage.style.display = "none";
-  gameContainer.style.display = "flex";
   continueMessage.style.display = "none";
   gameOver.style.display = "none";
-  livesContainer.innerHTML = ""; // remove heart display
+  livesContainer.innerHTML = ""; // remove hearts display
+  // Show the game screen
+  gameContainer.style.display = "flex";
+
   varScore.textContent = gameState.score;
-  if (gameState.wordsCompleted.length === 0) {
+
+  //Confirm if this is a continuation of the game or a new game.
+  if (Object.keys(gameState).length === 0) {
+    resetScores();
     gameState.wordsStored.push(...gameState.originalWords);
-  } else {
+  } //When game continues, gets the original user data but filters completed words
+  else {
     gameState.wordsStored = gameState.originalWords.filter(
       (word) => !gameState.wordsCompleted.includes(word)
     );
@@ -41,8 +54,8 @@ function starts() {
 
 export function getWords() {
   starts();
-  console.table(gameStateOriginal);
-  createLifes(gameState.lives);
+
+  createLives(gameState.lives);
   const interval = setInterval(async () => {
     if (gameState.wordsStored.length === 0) {
       clearInterval(interval);
@@ -60,7 +73,7 @@ export function getWords() {
   }, 1000);
 }
 
-function createLifes(lives) {
+function createLives(lives) {
   for (let i = 0; i < lives; i++) {
     const heart = document.createElement("span");
     heart.textContent = "❤️";
@@ -84,6 +97,7 @@ function scoreWords(b, arrayFalling, arrayStored, arrayOriginal) {
 }
 export function loseLife(arrayFalling, word) {
   removeWords(arrayFalling, word);
+
   if (arrayFalling.length != 0) {
     arrayFalling.forEach((e) => {
       const blockLeft = document.getElementById(e);
@@ -107,16 +121,40 @@ function removeWords(array, word) {
 function gameOverScreen() {
   gameOver.style.display = "flex";
   gameContainer.style.display = "none";
-  if (gameState.lives === 0) {
-    winner.style.visibility = "hidden";
-  }
-  looser.style.visibility = "hidden";
-}
 
+  if (gameState.lives === 0) {
+    resultmessage.insertAdjacentHTML(
+      "afterbegin",
+      `
+       <h1>GAME OVER</h1>
+       <p><strong>You have lost all your lives! </strong><br>
+       Your score is: <strong>${gameState.score}</strong><br>
+       <br>
+       Start a new game with fresh words, or restart to try again with the same
+        words.
+       </p>
+       `
+    );
+  } else {
+    resultmessage.insertAdjacentHTML(
+      "afterbegin",
+      `
+       <h1>Congratulations!!</h1>
+       <p><strong>You have won</strong><br><br>
+       Your score is: <strong>${gameState.score}</strong><br>
+       <br>
+       Start a new game with fresh words, or restart to try again with the same
+        words.
+       </p>
+       `
+    );
+  }
+}
 function newGameStart() {
   startPage.style.display = "flex";
   gameOver.style.display = "none";
-  resetScores();
+  gameState = {};
+  form.reset();
 }
 
 function restartGameStart() {

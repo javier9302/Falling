@@ -1,10 +1,29 @@
-import { originalWords, lives } from "./ui.js";
+import { getWords } from "./gameLogic.js";
+
+export const form = document.getElementById("settings-form");
+const livesInput = document.getElementById("lives");
+const contentInput = document.getElementById("content");
+
+let livesNum = 5;
 
 export const gameStateOriginal = {
-  lives: lives,
+  lives: livesNum,
   score: 0,
   wordsFalling: [],
   wordsCompleted: [],
-  originalWords: [...originalWords],
+  originalWords: [],
   wordsStored: [],
 };
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log(contentInput);
+  livesNum = parseInt(livesInput.value, 10);
+  if (isNaN(livesNum)) livesNum = 5;
+
+  let originalWords = contentInput.value.split(",");
+
+  gameStateOriginal.lives = livesNum;
+  gameStateOriginal.originalWords = [...originalWords];
+  getWords();
+});
