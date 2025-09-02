@@ -30,7 +30,7 @@
   border-inline: 5px solid #ffde7a;
   overflow: hidden;
   background-color: rgb(192, 248, 248);
-  background-image: url("../sources/background.svg");
+  background-image: url("./sources/background.svg");
   background-size: cover;
   background-position: bottom;
 }
