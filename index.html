@@ -12,25 +12,44 @@
   </head>
   <body>
     <div class="start-page" id="start-page">
-      <h1>Quiz Game!</h1>
+      <h1 class="mb-4">Quiz Game!</h1>
 
       <form id="settings-form">
-        <div class="row g-3 align-items-center">
+        <div class="mb-3">
           <label class="form-label">
             Number of Lives (Maximum 20)
-            <input type="number" name="lives" id="lives" min="1" max="20" />
+            <input
+              type="number"
+              name="lives"
+              class="form-control mt-3"
+              id="lives"
+              min="1"
+              max="20"
+            />
           </label>
         </div>
-        <div class="row g-3 align-items-center">
+        <div class="mb-3">
           <label class="form-label">
             Content: Type the elements you want to see falling. It can be words,
             math operations or questions. <br />
             Separate each element using ",". Eg. Roma, Paris, London, Tokyo,
             Sydney
-            <input type="text" name="content" id="content" required="True" />
+            <input
+              type="text"
+              name="content"
+              id="content"
+              class="form-control mt-3"
+              required="True"
+            />
           </label>
         </div>
-        <button type="submit" id="start" class="settings-buttons">Start</button>
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto align-items-center">
+            <button type="submit" id="start" class="settings-buttons">
+              Start
+            </button>
+          </div>
+        </div>
       </form>
     </div>
     <div id="game-container">
