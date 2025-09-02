@@ -1,6 +1,7 @@
 import { mainGameContainer } from "./ui.js";
 import { loseLife } from "./gameLogic.js";
 import { continueMessage } from "./ui.js";
+import { gameState } from "./gameLogic.js";
 
 export function createBlocks(word) {
   const newBlock = document.createElement("button");
@@ -31,7 +32,10 @@ export function blocksFalling(word, arrayFalling, arrayStored) {
   const block = document.getElementById(word);
   let pos = 0;
   const fall = setInterval(() => {
-    if (!block) {
+    let time = new Date().toLocaleTimeString();
+    console.log(word, time);
+    if (!block || gameState.loseLife) {
+      console.log(gameState.loseLife);
       clearInterval(fall);
       return;
     }
@@ -40,8 +44,8 @@ export function blocksFalling(word, arrayFalling, arrayStored) {
     if (pos > mainGameContainer.offsetHeight - block.offsetHeight) {
       block.remove();
       clearInterval(fall);
-      block.classList.add("blink");
       if (arrayFalling.includes(word)) {
+        gameState.loseLife = word;
         loseLife(arrayFalling, word);
         continueMessage.style.display = "flex";
         return (arrayStored.length = 0);

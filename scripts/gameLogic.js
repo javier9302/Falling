@@ -13,14 +13,10 @@ import {
 } from "./ui.js";
 import { createBlocks, blocksFalling } from "./blocks.js";
 
-let gameState = {};
+export let gameState = {};
 
 function resetScores() {
-  console.table(gameState);
-  console.table(gameStateOriginal);
-
   gameState = structuredClone(gameStateOriginal);
-  console.table(gameState);
   return gameState;
 }
 function starts() {
@@ -46,6 +42,7 @@ function starts() {
     gameState.wordsStored.push(...gameState.originalWords);
   } //When game continues, gets the original user data but filters completed words
   else {
+    gameState.loseLife = "";
     gameState.wordsStored = gameState.originalWords.filter(
       (word) => !gameState.wordsCompleted.includes(word)
     );
@@ -109,6 +106,7 @@ export function loseLife(arrayFalling, word) {
   if (gameState.lives === 0) {
     gameOverScreen();
   }
+  return gameState.loseLife;
 }
 
 function removeWords(array, word) {

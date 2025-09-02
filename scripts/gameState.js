@@ -13,11 +13,11 @@ export const gameStateOriginal = {
   wordsCompleted: [],
   originalWords: [],
   wordsStored: [],
+  lostLife: "",
 };
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log(contentInput);
   livesNum = parseInt(livesInput.value, 10);
   if (isNaN(livesNum)) livesNum = 5;
 
