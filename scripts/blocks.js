@@ -28,28 +28,36 @@ function detectOverflow(newBlock) {
   );
 }
 
-export function blocksFalling(word, arrayFalling, arrayStored) {
+export function blocksFalling(
+  word,
+  arrayFalling,
+  arrayStored,
+  newBlockInterval
+) {
   const block = document.getElementById(word);
   let pos = 0;
+  let h = mainGameContainer.offsetHeight - block.offsetHeight;
+  const t = gameState.timeToFall * 1000;
+  let speed = h / t;
+  console.log(speed);
   const fall = setInterval(() => {
     let time = new Date().toLocaleTimeString();
-    console.log(word, time);
     if (!block || gameState.loseLife) {
-      console.log(gameState.loseLife);
       clearInterval(fall);
       return;
     }
     pos += 1;
     block.style.top = pos + "px";
-    if (pos > mainGameContainer.offsetHeight - block.offsetHeight) {
+    if (pos > h) {
       block.remove();
       clearInterval(fall);
       if (arrayFalling.includes(word)) {
         gameState.loseLife = word;
         loseLife(arrayFalling, word);
+        clearInterval(newBlockInterval);
         continueMessage.style.display = "flex";
         return (arrayStored.length = 0);
       }
     }
-  }, 10);
+  }, 1 / speed);
 }

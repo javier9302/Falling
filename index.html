@@ -43,6 +43,36 @@
             />
           </label>
         </div>
+        <div class="mb-3">
+          <label class="form-label">
+            Time to wait to fall. Set the time in seconds that you want to allow
+            to answer. Min. 3 seconds Max. 60 seconds
+            <input
+              type="number"
+              name="lives"
+              class="form-control mt-3 w-25"
+              id="fall-time"
+              min="3"
+              max="60"
+              value="5"
+            />
+          </label>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">
+            Time that separates the blocks. Set the time you want to wait to
+            throw another block.
+            <input
+              type="number"
+              name="lives"
+              class="form-control mt-3 w-25"
+              id="separate-time"
+              min="2"
+              max="10"
+              value="5"
+            />
+          </label>
+        </div>
         <div class="row justify-content-md-center">
           <div class="col-md-auto align-items-center">
             <button type="submit" id="start" class="settings-buttons">

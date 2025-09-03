@@ -51,23 +51,26 @@ function starts() {
 
 export function getWords() {
   starts();
-
+  console.table(gameState);
   createLives(gameState.lives);
-  const interval = setInterval(async () => {
+  const newBlockInterval = setInterval(() => {
     if (gameState.wordsStored.length === 0) {
-      clearInterval(interval);
+      clearInterval(newBlockInterval);
       return;
     }
-    if (gameState.wordsFalling.length >= 3) return;
-
     let choosen = Math.floor(Math.random() * gameState.wordsStored.length);
     let currentWord = gameState.wordsStored[choosen];
 
     gameState.wordsFalling.push(currentWord);
     removeWords(gameState.wordsStored, currentWord);
     createBlocks(currentWord);
-    blocksFalling(currentWord, gameState.wordsFalling, gameState.wordsStored);
-  }, 1000);
+    blocksFalling(
+      currentWord,
+      gameState.wordsFalling,
+      gameState.wordsStored,
+      newBlockInterval
+    );
+  }, gameState.timeToSeparateBlocks * 1000);
 }
 
 function createLives(lives) {

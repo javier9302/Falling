@@ -1,9 +1,10 @@
-import { getWords } from "./gameLogic.js";
+import { gameState, getWords } from "./gameLogic.js";
 
 export const form = document.getElementById("settings-form");
 const livesInput = document.getElementById("lives");
 const contentInput = document.getElementById("content");
-
+const timeToFall = document.getElementById("fall-time");
+const timeToSeparateBlocks = document.getElementById("separate-time");
 let livesNum = 5;
 
 export const gameStateOriginal = {
@@ -14,6 +15,8 @@ export const gameStateOriginal = {
   originalWords: [],
   wordsStored: [],
   lostLife: "",
+  timeToFall: 0,
+  timeToSeparateBlocks: 0,
 };
 
 form.addEventListener("submit", (event) => {
@@ -25,5 +28,7 @@ form.addEventListener("submit", (event) => {
 
   gameStateOriginal.lives = livesNum;
   gameStateOriginal.originalWords = [...originalWords];
+  gameStateOriginal.timeToFall = timeToFall.value;
+  gameStateOriginal.timeToSeparateBlocks = timeToSeparateBlocks.value;
   getWords();
 });
